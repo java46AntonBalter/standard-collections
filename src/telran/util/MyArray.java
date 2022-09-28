@@ -35,7 +35,7 @@ public class MyArray<T> {
 	 * @return value at given index or null if index is wrong
 	 */
 	public T get(int index) {
-		return (arr.containsKey(index) || index < size) ? arr.getOrDefault(index, defaultValue) : null;
+		return (index >= 0 && index < size) ? arr.getOrDefault(index, defaultValue) : null;
 	}
 
 	/**
