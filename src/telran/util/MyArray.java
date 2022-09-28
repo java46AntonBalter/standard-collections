@@ -50,6 +50,5 @@ public class MyArray<T> {
 			throw new IndexOutOfBoundsException();
 		}
 		arr.put(index, value);
-
 	}
 }
