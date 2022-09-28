@@ -11,8 +11,8 @@ import java.util.*;
  */
 public class MyArray<T> {
 
-	private Map<Integer, T> arr = new HashMap<>();
-	private T sharedValue = null;
+	private Map<Integer, T> arr = new HashMap<Integer, T>();
+	private T defaultValue = null;
 	public int size;
 
 	public MyArray(int size) {
@@ -25,8 +25,8 @@ public class MyArray<T> {
 	 * @param value
 	 */
 	public void setAll(T value) {
-		arr = new HashMap<>();
-		sharedValue = value;
+		arr = new HashMap<Integer, T>();
+		defaultValue = value;
 	}
 
 	/**
@@ -35,7 +35,7 @@ public class MyArray<T> {
 	 * @return value at given index or null if index is wrong
 	 */
 	public T get(int index) {
-		return (arr.containsKey(index) || index < size) ? arr.getOrDefault(index, sharedValue) : null;
+		return (arr.containsKey(index) || index < size) ? arr.getOrDefault(index, defaultValue) : null;
 	}
 
 	/**
