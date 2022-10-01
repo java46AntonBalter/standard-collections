@@ -21,9 +21,9 @@ public class MyArray<T> {
 	 * @param value
 	 */
 	public void setAll(T value) {
+		
 		mapOfSets = new HashMap<>();
 		allValues = value;
-		
 	}
 	/**
 	 * 
