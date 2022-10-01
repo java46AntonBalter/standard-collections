@@ -5,7 +5,9 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -80,15 +82,10 @@ class Java8StreamTests {
 	}
 	@Test
 	void printDigitOccurrences() {
-		//TODO
-		//generate 1_000_000 random numbers from 0 to Integer.MAX_VALUE
-		//print digits occurrences in descending order of occurrences
-		// 1: <occurrences>
-		// 2: <occurrences>
-		// ......
+		IntStream randStream = new Random().ints(1000000, 0, Integer.MAX_VALUE); 
+		randStream.flatMap(i -> Integer.toString(i).chars())
+		.mapToObj(ch -> (char) ch).collect(Collectors.groupingBy(t -> t, Collectors.counting()))
+		.entrySet().stream().sorted((e2, e1) -> Long.compare(e1.getValue(), e2.getValue()))
+		.forEach(e -> System.out.printf("%c -> %d\n",e.getKey(), e.getValue()));			
 	}
-	
-	
-	
-
 }
