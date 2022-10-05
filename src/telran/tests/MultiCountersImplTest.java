@@ -41,7 +41,10 @@ class MultiCountersImplTest {
 		for (String i : arr2) {
 			map.addItem(i);
 		}
-		System.out.println(map.getMaxItems());		
+		System.out.println(map.getMaxItems());	
+		map.remove("x");
+		System.out.println(map.getMaxItems());
+		
 	}
 
 }
