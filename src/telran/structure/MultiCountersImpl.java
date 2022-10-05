@@ -44,7 +44,7 @@ public class MultiCountersImpl implements MultiCounters {
 	}
 
 	private HashSet<Object> removeFromTreeMap(Object item, int key) {
-		return counters.compute(key, (k, v) -> {
+		return counters.computeIfPresent(key, (k, v) -> {
 			v.remove(item);
 			if (v.size() == 0) {
 				v = null;
