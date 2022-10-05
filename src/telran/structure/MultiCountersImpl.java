@@ -38,16 +38,6 @@ public class MultiCountersImpl implements MultiCounters {
 	public Set<Object> getMaxItems() {
 		return counters.get(counters.lastKey());
 	}
-
-	private HashSet<Object> removeFromTreeMap(Object item, int key) {
-		return counters.compute(key, (k, v) -> {
-			v.remove(item);
-			if (v.size() == 0) {
-				v = null;
-			}
-			return v;
-		});
-	}
 	
 	private void addToTreeMap(Object item, int key) {
 		counters.compute(key, (k, v) -> {
@@ -55,6 +45,16 @@ public class MultiCountersImpl implements MultiCounters {
 				v = new HashSet<Object>();
 			}
 			v.add(item);
+			return v;
+		});
+	}
+
+	private HashSet<Object> removeFromTreeMap(Object item, int key) {
+		return counters.compute(key, (k, v) -> {
+			v.remove(item);
+			if (v.size() == 0) {
+				v = null;
+			}
 			return v;
 		});
 	}
