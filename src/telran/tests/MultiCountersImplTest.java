@@ -28,6 +28,7 @@ class MultiCountersImplTest {
 		assertEquals(3, map.getValue("a"));
 		assertEquals(2, map.getValue("c"));
 		assertEquals(1, map.getValue("f"));
+		assertEquals(null, map.getValue("x"));
 	}
 	@Test
 	void removeTest() {

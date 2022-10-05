@@ -40,13 +40,7 @@ public class MultiCountersImpl implements MultiCounters {
 	}
 	
 	private void addToTreeMap(Object item, int key) {
-		counters.compute(key, (k, v) -> {
-			if (v == null) {
-				v = new HashSet<Object>();
-			}
-			v.add(item);
-			return v;
-		});
+		counters.computeIfAbsent(key, k -> new HashSet<Object>()).add(item);
 	}
 
 	private HashSet<Object> removeFromTreeMap(Object item, int key) {
