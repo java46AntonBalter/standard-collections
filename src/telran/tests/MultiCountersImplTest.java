@@ -1,50 +1,63 @@
 package telran.tests;
 
 import static org.junit.jupiter.api.Assertions.*;
+import telran.structure.*;
+import java.util.Set;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import telran.structure.*;
 
-class MultiCountersImplTest {
-	String arr[] = {"a", "a", "a", "b", "b", "b", "c", "c", "d", "d", "e", "f"};
-	MultiCountersImpl map = new MultiCountersImpl();
-
-	@BeforeEach
-	void setUp() throws Exception {
-		for (String i : arr) {
-			map.addItem(i);
-		}
-	}
-
+class MultiCountersTest {
+MultiCounters multiCounters;
+@BeforeEach
+void setUp() {
+	multiCounters = new MultiCountersImpl();
+	multiCounters.addItem("a");
+	multiCounters.addItem("a");
+	multiCounters.addItem("a");
+	multiCounters.addItem(123);
+	multiCounters.addItem(123);
+	multiCounters.addItem("b");
+	
+}
 	@Test
 	void addItemTest() {
-		assertEquals(1, map.addItem("g"));
-		assertEquals(2, map.addItem("e"));
+		assertEquals(4, multiCounters.addItem("a"));
+		assertEquals(1, multiCounters.addItem("abcd12"));
 	}
-	
 	@Test
 	void getValueTest() {
-		assertEquals(3, map.getValue("a"));
-		assertEquals(2, map.getValue("c"));
-		assertEquals(1, map.getValue("f"));
-		assertEquals(null, map.getValue("x"));
+		assertEquals(3, multiCounters.getValue("a"));
+		assertEquals(2, multiCounters.getValue(123));
+		assertEquals(1, multiCounters.getValue("b"));
+		assertNull(multiCounters.getValue("c"));
 	}
 	@Test
 	void removeTest() {
-		assertTrue(map.remove("a"));
-		assertFalse(map.remove("x"));
+		assertTrue(multiCounters.remove(123));
+		assertFalse(multiCounters.remove(123));
 	}
 	@Test
-	void getMaxItemsSet () {
-		System.out.println(map.getMaxItems());
-		String arr2[] = {"x", "x", "x", "x", "x"};
-		for (String i : arr2) {
-			map.addItem(i);
+	void getMaxItemsTest() {
+		Object expected[] = {"a"};
+		runArraySet(expected, multiCounters.getMaxItems());
+		multiCounters.addItem(123);
+		Object expected1[] = {"a", 123};
+		runArraySet(expected1, multiCounters.getMaxItems());
+		multiCounters.remove(123);
+		runArraySet(expected, multiCounters.getMaxItems());
+		multiCounters.remove("a");
+		Object expected2[] = {"c"};
+		runArraySet(expected2, multiCounters.getMaxItems());
+		multiCounters.remove("b");
+		runArraySet(new Object[0], multiCounters.getMaxItems());
+		
+	}
+	private void runArraySet(Object[] expected, Set<Object> maxItems) {
+		assertEquals(expected.length, maxItems.size());
+		for(Object item: expected) {
+			maxItems.contains(item);
 		}
-		System.out.println(map.getMaxItems());	
-		map.remove("x");
-		System.out.println(map.getMaxItems());
 		
 	}
 
