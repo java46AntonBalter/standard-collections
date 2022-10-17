@@ -94,7 +94,7 @@ class ArrayTests {
 		
 		if (count == 2) {
 	        swap(arr, first - 1, second);
-		} else if (count == 1) {
+		} else {
 	        swap(arr, first - 1, first);
 		}
 		
