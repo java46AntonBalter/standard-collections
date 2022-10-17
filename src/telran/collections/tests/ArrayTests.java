@@ -106,7 +106,7 @@ class ArrayTests {
 		return true;
 	}
 	
-	private static <T extends Comparable<T>> void swap(T[] arr, int i, int j)
+	private static <T> void swap(T[] arr, int i, int j)
 	{
 	    T temp = arr[i];
 	    arr[i] = arr[j];
@@ -129,6 +129,22 @@ class ArrayTests {
 		assertTrue(isOneSwapForSorted(arr6));
 		String[] arr7 = {"lmn", "ab", "bc", "cd", "a"};
 		assertTrue(isOneSwapForSorted(arr7));
+		Integer arTrue1[] = {1, 6, 3, 4, 2, 10};
+		assertTrue(isOneSwapForSorted(arTrue1));
+		Integer arTrue2[] = {1, 2, 4, 3, 6, 10};
+		assertTrue(isOneSwapForSorted(arTrue2));
+		Integer arTrue3[] = {10, 2, 3, 4, 6, 1};
+		assertTrue(isOneSwapForSorted(arTrue3));
+		Integer arTrue4[] = {3, 2, 3, 4, 6, 10};
+		assertTrue(isOneSwapForSorted(arTrue4));
+		Integer arTrue5[] = {1, 2, 3, 4, 6, 10, 7};
+		assertTrue(isOneSwapForSorted(arTrue5));
+		Integer arFalse1[] = {1, 10, 2, 3, 6, 4};
+		assertFalse(isOneSwapForSorted(arFalse1));
+		Integer arFalse2[] = {1, 2, 4, 2, 10, 6};
+		assertFalse(isOneSwapForSorted(arFalse2));
+		Integer arFalse3[] = {1, 2, 3, 4, 6, 10};
+		assertFalse(isOneSwapForSorted(arFalse3));
 	}
 
 }
